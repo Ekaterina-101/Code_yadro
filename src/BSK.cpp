@@ -2,12 +2,12 @@
 #include <random>
 #include <iostream>
 
-std::vector<int> DSK(double p, std::vector<int>& word) {
+std::vector<double> BSK(double p, std::vector<double>& word) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<double> dist(0.0, 1.0);
     
-    std::vector<int> result = word;
+    std::vector<double> result = word;
     
     for (std::size_t i = 0; i < result.size(); i++) {
         double random_value = dist(gen);
@@ -21,8 +21,8 @@ std::vector<int> DSK(double p, std::vector<int>& word) {
 }
 
 int main() {
-    std::vector<int> w = {1, -1, 1, -1, 1, 1, 1};
-    std::vector<int> res = DSK(0.0, w);
+    std::vector<double> w = {1, -1, 1, -1, 1, 1, 1};
+    std::vector<double> res = BSK(0.0, w);
 
     for (std::size_t i = 0; i < res.size(); i++) {
         std::cout << res[i];

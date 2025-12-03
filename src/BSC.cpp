@@ -20,13 +20,3 @@ std::vector<double> BSC(double p, std::vector<double>& word) {
     
     return result;
 }
-
-// int main() {
-//     std::vector<double> w = {1, -1, 1, -1, 1, 1, 1};
-//     std::vector<double> res = BSK(0.0, w);
-
-//     for (std::size_t i = 0; i < res.size(); i++) {
-//         std::cout << res[i];
-//     }
-//     std::cout << std::endl;
-// }

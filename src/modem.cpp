@@ -29,9 +29,9 @@ std::vector<int> BPSKdemod(const std::vector<double>& input_signal) {
     return output_bits;
 }
 
-std::vector<complex> QPSKmod(const std::vector<int>& input_bits) {
+std::vector<complex_signal> QPSKmod(const std::vector<int>& input_bits) {
     size_t length = input_bits.size() / 2;
-    std::vector<complex> modulated_signal(length);
+    std::vector<complex_signal> modulated_signal(length);
 
     double norm = 1.0 / std::sqrt(2.0);
     
@@ -43,7 +43,7 @@ std::vector<complex> QPSKmod(const std::vector<int>& input_bits) {
     return modulated_signal;
 }
 
-std::vector<int> QPSKdemod(const std::vector<complex>& input_signal) {
+std::vector<int> QPSKdemod(const std::vector<complex_signal>& input_signal) {
     size_t length = input_signal.size();
     std::vector<int> output_bits(length * 2);
 

@@ -4,12 +4,12 @@
 #include <iostream>
 #include <cmath>
 
-struct complex {
+struct complex_signal {
     double Re;
     double Im;
 };
 
-std::vector<complex> AWGN_Q(double SNR, std::vector<complex>& word) {
+std::vector<complex_signal> AWGN_Q(double SNR, std::vector<complex_signal>& word) {
 
     double b = 0.5 * std::pow(10.0, -SNR/10.0);
 
@@ -17,7 +17,7 @@ std::vector<complex> AWGN_Q(double SNR, std::vector<complex>& word) {
     std::mt19937 gen(rd());
     std::normal_distribution<double> dist(0.0, b/2.0);
 
-    std::vector<complex> res = word;
+    std::vector<complex_signal> res = word;
 
     for (std::size_t i = 0; i < word.size(); i++) {
         res[i].Re += dist(gen);
@@ -45,19 +45,3 @@ std::vector<double> AWGN_B(double SNR, std::vector<double>& word) {
 
     return res;
 }
-
-// int main() {
-//     std::vector<double> w = {1, -1, 1, -1, 1, 1, 1};
-//     std::vector<double> res = AWGN_B(12.0, w);
-//     std::cout << "word" << std::endl;
-//     for (std::size_t i = 0; i < res.size(); i++) {
-//         std::cout << w[i] << " ";
-//     }
-//     std::cout << std::endl;
-
-//     std::cout << "word after AWGN_B" << std::endl;
-//     for (std::size_t i = 0; i < res.size(); i++) {
-//         std::cout << res[i] << " ";
-//     }
-//     std::cout << std::endl;
-// }

@@ -17,8 +17,8 @@ int main() {
     std::vector<double> noisedSignal2 = AWGN_B(0.0, BPSKsigalAWGN_B);
     std::vector<int> BPSKdeSignalAWGN_B = BPSKdemod(noisedSignal2);
 
-    std::vector<complex> BPSKsigalAWGN_Q = QPSKmod(CRCencoded);
-    std::vector<complex> noisedSignal3 = AWGN_Q(0.0, BPSKsigalAWGN_Q);
+    std::vector<complex_signal> BPSKsigalAWGN_Q = QPSKmod(CRCencoded);
+    std::vector<complex_signal> noisedSignal3 = AWGN_Q(0.0, BPSKsigalAWGN_Q);
     std::vector<int> BPSKdeSignalAWGN_Q = QPSKdemod(noisedSignal3);
 
 

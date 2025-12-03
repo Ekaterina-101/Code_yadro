@@ -1,3 +1,4 @@
+#include "../include/noise.hpp"
 #include <vector>
 #include <random>
 #include <iostream>
@@ -45,18 +46,18 @@ std::vector<double> AWGN_B(double SNR, std::vector<double>& word) {
     return res;
 }
 
-int main() {
-    std::vector<double> w = {1, -1, 1, -1, 1, 1, 1};
-    std::vector<double> res = AWGN_B(12.0, w);
-    std::cout << "word" << std::endl;
-    for (std::size_t i = 0; i < res.size(); i++) {
-        std::cout << w[i] << " ";
-    }
-    std::cout << std::endl;
+// int main() {
+//     std::vector<double> w = {1, -1, 1, -1, 1, 1, 1};
+//     std::vector<double> res = AWGN_B(12.0, w);
+//     std::cout << "word" << std::endl;
+//     for (std::size_t i = 0; i < res.size(); i++) {
+//         std::cout << w[i] << " ";
+//     }
+//     std::cout << std::endl;
 
-    std::cout << "word after AWGN_B" << std::endl;
-    for (std::size_t i = 0; i < res.size(); i++) {
-        std::cout << res[i] << " ";
-    }
-    std::cout << std::endl;
-}
+//     std::cout << "word after AWGN_B" << std::endl;
+//     for (std::size_t i = 0; i < res.size(); i++) {
+//         std::cout << res[i] << " ";
+//     }
+//     std::cout << std::endl;
+// }

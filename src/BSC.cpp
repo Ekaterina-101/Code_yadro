@@ -1,7 +1,4 @@
-#include "../include/noise.hpp"
-#include <vector>
-#include <random>
-#include <iostream>
+#include "noise.hpp"
 
 std::vector<double> BSC(double p, std::vector<double>& word) {
     std::random_device rd;

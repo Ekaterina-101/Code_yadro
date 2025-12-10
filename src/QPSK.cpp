@@ -19,16 +19,23 @@ std::vector<int> QPSKdemod(const std::vector<std::complex<double>>& input_signal
     std::vector<int> output_bits(length * 2);
 
     for (size_t i = 0; i < length; i++) {
-        if (input_signal[i].real() < 0) {
-            output_bits[2 * i] = 1;
-        } else {
+        double d00 = std::abs(input_signal[i] - std::complex<double>(1.0, 1.0));
+        double d10 = std::abs(input_signal[i] - std::complex<double>(-1.0, 1.0));
+        double d01 = std::abs(input_signal[i] - std::complex<double>(1.0, -1.0));
+        double d11 = std::abs(input_signal[i] - std::complex<double>(-1.0, -1.0));
+
+        double min_dist = std::min(std::min(d00, d10), std::min(d01, d11));
+        
+        if (min_dist == d00 || min_dist == d01) {
             output_bits[2 * i] = 0;
+        } else {
+            output_bits[2 * i] = 1;
         }
 
-        if (input_signal[i].imag() < 0) {
-            output_bits[2 * i + 1] = 1;
-        } else {
+        if (min_dist == d00 || min_dist == d10) {
             output_bits[2 * i + 1] = 0;
+        } else {
+            output_bits[2 * i + 1] = 1;
         }
     }
 

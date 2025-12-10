@@ -12,14 +12,14 @@ void printResult(std::vector<int>& input_signal, std::vector<int>& output_signal
             count_err_bit++;
         }
     }
-    std::cout << std::fixed << std::setprecision(2) << "p/SNR = " << param << std::fixed << std::setprecision(6) << "  BER = " << double(count_err_bit)/input_signal.size() << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "p/SNR = " << param << std::fixed << std::setprecision(7) << "  BER = " << double(count_err_bit)/input_signal.size() << std::endl;
 }
 
 int main() {
     srand(time(0));
     int i = 0;
     std::vector<int> w;
-    while (i++ < 100000) {
+    while (i++ < 10000) { // 10^7 for graphics (slow)
         int random_bit = rand() % 2;
         w.push_back(random_bit);
     }
@@ -28,7 +28,7 @@ int main() {
     std::vector<int> encoded_CRC = crc.encodeCRC(w);
 
     std::cout << "\n ----- BPSK + BSC ----- " << std::endl;
-    for (int p = 0; p < 100; p += 1) {
+    for (int p = 0; p < 100; p += 2) {
         std::vector<double> modulated = BPSKmod(encoded_CRC);
         std::vector<double> noised = BSC(p/100.0, modulated);
         std::vector<int> demodulated = BPSKdemod(noised);
@@ -39,7 +39,7 @@ int main() {
     }
 
     std::cout << "\n ----- BPSK + AWGN ----- " << std::endl;
-    for (double SNR = 4.0; SNR <= 12.0; SNR += 0.05) {
+    for (double SNR = 4.0; SNR <= 12.0; SNR += 0.1) {
         std::vector<double> modulated = BPSKmod(encoded_CRC);
         std::vector<double> noised = AWGN_B(SNR, modulated);
         std::vector<int> demodulated = BPSKdemod(noised);
@@ -50,7 +50,7 @@ int main() {
     }
 
     std::cout << "\n ----- QPSK + AWGN ----- " << std::endl;
-    for (double SNR = 4.0; SNR <= 12.0; SNR += 0.05) {
+    for (double SNR = 4.0; SNR <= 12.0; SNR += 0.1) {
         std::vector<std::complex<double>> modulated = QPSKmod(encoded_CRC);
         std::vector<std::complex<double>> noised = AWGN_Q(SNR, modulated);
         std::vector<int> demodulated = QPSKdemod(noised);
